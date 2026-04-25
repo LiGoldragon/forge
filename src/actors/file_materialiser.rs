@@ -1,8 +1,9 @@
 //! FileMaterialiser — projects store entries into a workdir.
 //!
-//! When rsc emits a workdir for nix to compile, this actor
-//! materialises the source tree from sema records (resolved
-//! through criome) into actual files at a temp path.
+//! When prism emits source files for the runtime-creation
+//! pipeline to compile, this actor materialises the source tree
+//! from sema records (resolved through criome) into actual files
+//! at a temp path.
 
 use crate::Result;
 
