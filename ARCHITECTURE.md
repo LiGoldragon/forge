@@ -11,9 +11,10 @@ outcomes back.
    sema records (Opus + OpusDeps + ...)
             │
             ▼
-   criome (daemon) — plans the build
+   criome (daemon) — plans the build, signs capability tokens
             │
-            │  signal (rkyv: effect-bearing verbs)
+            │  signal-forge (rkyv: effect-bearing verbs)
+            │  + criome-signed token authorising arca writes
             ▼
    forge (this daemon) — executes
             │
@@ -23,12 +24,24 @@ outcomes back.
    nix build / nixos-rebuild
             │
             ▼
-   /nix/store/<hash>-<name>/   (transient)
+   /nix/store/<hash>-<name>/         (transient)
             │
-            │  StoreWriter: copy closure + RPATH rewrite + blake3
+            │  StoreWriter actor: copy closure + RPATH rewrite +
+            │                     deterministic timestamps
             ▼
-   ~/.arca/<blake3>/           (canonical, sema-referenced)
+   ~/.arca/_staging/<deposit-id>/     (write-only staging)
+            │
+            │  signal-arca: Deposit { staging_id, capability_token }
+            ▼
+   arca-daemon — verifies token, computes blake3, atomic move
+            │
+            ▼
+   ~/.arca/<store>/<blake3>/         (canonical, sema-referenced)
 ```
+
+forge **writes to arca's staging directory** and asks
+arca-daemon to take ownership. forge does NOT compute the
+blake3 or write to arca's canonical store — arca-daemon does.
 
 ## Boundaries
 
@@ -36,10 +49,12 @@ Owns:
 
 - The forge daemon binary.
 - Internal actor system (NixRunner, StoreWriter, StoreReaderPool,
-  FileMaterialiser).
+  FileMaterialiser, ArcaDepositor).
 - The prism library link (records → Rust source).
-- Capability-token verification on incoming signal requests
-  (tokens signed by criome).
+- Capability-token verification on incoming signal-forge
+  requests from criome (tokens signed by criome).
+- Holds the criome-signed capability token forge presents to
+  arca-daemon when depositing build outputs.
 
 Does not own:
 
@@ -49,10 +64,10 @@ Does not own:
   [signal-forge](https://github.com/LiGoldragon/signal-forge));
   this daemon consumes both — signal for Frame/handshake/auth
   + record types, signal-forge for the criome-to-forge verbs.
-- The arca layout / reader-writer types (lives in
-  [arca](https://github.com/LiGoldragon/arca); this daemon
-  links it as a library and is the privileged writer at
-  runtime).
+- The arca store layout (lives in
+  [arca](https://github.com/LiGoldragon/arca); arca-daemon is
+  the privileged writer; this daemon deposits into arca's
+  write-only staging and asks arca-daemon to take ownership).
 - Plan creation — criome plans; this daemon executes.
 - Sema state.
 
@@ -67,7 +82,12 @@ src/
 └── actors/
     ├── mod.rs
     ├── nix_runner.rs        — spawns nix build / nixos-rebuild
-    ├── store_writer.rs      — StoreWriter + StoreReaderPool
+    ├── store_writer.rs      — bundles nix output (RPATH rewrite,
+    │                          deterministic timestamps) and writes
+    │                          into arca's _staging directory
+    ├── arca_depositor.rs    — sends signal-arca Deposit verb to
+    │                          arca-daemon with the staging id +
+    │                          capability token; awaits hash reply
     └── file_materialiser.rs — projects arca entries → workdir
 ```
 

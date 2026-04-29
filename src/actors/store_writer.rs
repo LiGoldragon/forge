@@ -1,5 +1,10 @@
-//! StoreWriter — places nix-built artifacts into `arca`.
-//! StoreReaderPool — concurrent path lookups.
+//! StoreWriter — bundles nix-built artifacts (RPATH rewrite,
+//! deterministic timestamps) and writes the canonicalised tree
+//! into arca's write-only `_staging/` directory. Hand-off to
+//! arca-daemon happens in `arca_depositor.rs`.
+//!
+//! StoreReaderPool — concurrent path lookups against arca
+//! stores (filesystem-direct; no daemon round-trip needed).
 
 use crate::Result;
 
@@ -16,6 +21,6 @@ pub struct BundleOutcome {
 
 impl StoreWriter {
     pub async fn bundle(_spec: BundleSpec) -> Result<BundleOutcome> {
-        todo!("copy closure with RPATH rewrite (patchelf); blake3; write tree under ~/.arca/<hash>/")
+        todo!("copy closure with RPATH rewrite (patchelf); deterministic timestamps; write canonicalised tree under ~/.arca/_staging/<deposit-id>/ — arca-daemon computes blake3 + moves into the target store")
     }
 }
