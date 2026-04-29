@@ -8,7 +8,7 @@ outcomes back.
 ## Role in the sema-ecosystem
 
 ```
-   sema records (Opus + OpusDeps + ...)
+   sema records (target Graph + DependsOn graphs + Contains nodes + edges)
             │
             ▼
    criome (daemon) — plans the build, signs capability tokens
