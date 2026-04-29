@@ -1,8 +1,9 @@
 //! lojix — the lojix daemon.
 //!
-//! Receives `lojix-schema` requests over UDS from the criome
-//! daemon; spawns nix subprocesses; bundles outputs into
-//! `lojix-store` with RPATH rewrite; reports outcomes back.
+//! Receives effect-bearing signal verbs over UDS from the
+//! criome daemon; spawns nix subprocesses; bundles outputs
+//! into `lojix-store` with RPATH rewrite; reports outcomes
+//! back.
 //!
 //! Internal actors (per
 //! [criome/ARCHITECTURE.md §4](https://github.com/LiGoldragon/criome/blob/main/ARCHITECTURE.md)):

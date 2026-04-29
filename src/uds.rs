@@ -1,6 +1,6 @@
-//! UDS listener — accepts lojix-schema requests from criome.
+//! UDS listener — accepts signal requests from criome.
 //!
-//! Skeleton-as-design. Reads rkyv-archived request frames from
+//! Skeleton-as-design. Reads rkyv-archived signal frames from
 //! a Unix-domain socket; dispatches to the appropriate actor;
 //! writes rkyv-archived reply frames back.
 

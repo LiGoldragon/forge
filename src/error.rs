@@ -13,7 +13,7 @@ pub enum Error {
     #[error("store-entry placement failed: {0}")]
     StoreWrite(String),
 
-    #[error("invalid lojix-schema request: {0}")]
+    #[error("invalid signal request: {0}")]
     BadRequest(String),
 }
 

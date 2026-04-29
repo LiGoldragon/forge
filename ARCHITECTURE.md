@@ -1,9 +1,9 @@
 # ARCHITECTURE — lojix
 
 The lojix daemon — the executor of the lojix family. Takes
-plan records from criome (via `lojix-schema` requests over
-UDS), runs nix, places artifacts into `lojix-store`, reports
-outcomes back.
+plan records from criome (via signal verbs over UDS), runs
+nix, places artifacts into `lojix-store`, reports outcomes
+back.
 
 ## Role in the sema-ecosystem
 
@@ -13,7 +13,7 @@ outcomes back.
             ▼
    criome (daemon) — plans the build
             │
-            │  lojix-schema (rkyv: RunNix, BundleIntoLojixStore, ...)
+            │  signal (rkyv: effect-bearing verbs)
             ▼
    lojix (this daemon) — executes
             │
@@ -36,13 +36,14 @@ Owns:
 - The lojix daemon binary.
 - Internal actor system (NixRunner, StoreWriter, StoreReaderPool,
   FileMaterialiser).
-- Capability-token verification on incoming lojix-schema requests
+- Capability-token verification on incoming signal requests
   (tokens signed by criome).
 
 Does not own:
 
-- The lojix-schema contract (lives in
-  [lojix-schema](https://github.com/LiGoldragon/lojix-schema)).
+- The signal contract (lives in
+  [signal](https://github.com/LiGoldragon/signal); this daemon
+  consumes the effect-bearing subset).
 - The store layout / reader-writer types (lives in
   [lojix-store](https://github.com/LiGoldragon/lojix-store);
   this daemon links it as a library and is the privileged
@@ -57,7 +58,7 @@ src/
 ├── lib.rs           — module entry + re-exports
 ├── main.rs          — binary entry, tokio runtime, daemon loop
 ├── error.rs         — Error enum
-├── uds.rs           — UDS listener (lojix-schema requests in)
+├── uds.rs           — UDS listener (signal requests in)
 └── actors/
     ├── mod.rs
     ├── nix_runner.rs        — spawns nix build / nixos-rebuild
@@ -73,10 +74,9 @@ All bodies are `todo!()` skeleton-as-design.
   [criome/ARCHITECTURE.md](https://github.com/LiGoldragon/criome/blob/main/ARCHITECTURE.md)
 - Family peers:
   [lojix-store](https://github.com/LiGoldragon/lojix-store),
-  [lojix-cli](https://github.com/LiGoldragon/lojix-cli),
-  [lojix-schema](https://github.com/LiGoldragon/lojix-schema)
+  [lojix-cli](https://github.com/LiGoldragon/lojix-cli)
 
 ## Status
 
 **Skeleton-as-design.** Lands when criome scaffolds and is
-ready to drive `lojix-schema` verbs.
+ready to forward effect-bearing signal verbs.

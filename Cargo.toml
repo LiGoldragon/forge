@@ -5,7 +5,7 @@ edition      = "2024"
 rust-version = "1.85"
 license      = "MIT OR Apache-2.0"
 repository   = "https://github.com/LiGoldragon/lojix"
-description  = "lojix — the lojix daemon (forge + store + deploy actors). Receives lojix-schema requests over UDS from criome; runs nix; bundles into lojix-store."
+description  = "lojix — the lojix daemon (forge + store + deploy actors). Receives effect-bearing signal verbs over UDS from criome; runs nix; bundles into lojix-store."
 
 [lib]
 name = "lojix"
