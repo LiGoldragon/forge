@@ -1,8 +1,8 @@
 //! Internal actors. Each handles one capability area.
 //!
 //! `NixRunner` spawns nix processes; `StoreWriter` +
-//! `StoreReaderPool` manage `lojix-store`; `FileMaterialiser`
-//! projects store entries into working directories.
+//! `StoreReaderPool` manage `arca`; `FileMaterialiser`
+//! projects arca entries into working directories.
 //!
 //! All bodies are `todo!()` until the criome daemon is ready
 //! to drive them.

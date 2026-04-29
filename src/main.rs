@@ -1,6 +1,6 @@
-//! lojix daemon — binary entry point.
+//! forge daemon — binary entry point.
 
-use lojix::Result;
+use forge::Result;
 
 #[tokio::main]
 async fn main() -> Result<()> {

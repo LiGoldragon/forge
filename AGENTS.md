@@ -1,6 +1,6 @@
-# Agent Bootstrap — lojix
+# Agent Bootstrap — forge
 
-The lojix daemon. Skeleton-as-design today; bodies are
+The forge daemon. Skeleton-as-design today; bodies are
 `todo!()`. Read [ARCHITECTURE.md](ARCHITECTURE.md) for
 boundaries and code map.
 

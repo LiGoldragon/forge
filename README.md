@@ -1,13 +1,10 @@
-# lojix
+# forge
 
-The lojix daemon. Receives effect-bearing signal verbs over
-UDS from the criome daemon; spawns nix subprocesses; bundles
-outputs into [`lojix-store`](https://github.com/LiGoldragon/lojix-store);
+The forge daemon. Receives effect-bearing signal verbs over
+UDS from the criome daemon; links [`prism`](https://github.com/LiGoldragon/prism)
+to emit Rust source from records; spawns nix subprocesses;
+writes outputs into [`arca`](https://github.com/LiGoldragon/arca);
 reports outcomes.
-
-The bare `lojix` name does double duty: this daemon AND the
-family-namespace umbrella for `lojix-cli` and `lojix-store`.
-Same pattern as `nexus`.
 
 See [`ARCHITECTURE.md`](ARCHITECTURE.md). Project-wide context:
 [criome/ARCHITECTURE.md](https://github.com/LiGoldragon/criome/blob/main/ARCHITECTURE.md).

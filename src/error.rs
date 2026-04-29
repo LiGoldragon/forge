@@ -1,4 +1,4 @@
-//! Error type for the lojix daemon.
+//! Error type for the forge daemon.
 
 use thiserror::Error;
 

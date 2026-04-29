@@ -1,4 +1,4 @@
-//! StoreWriter — places nix-built artifacts into `lojix-store`.
+//! StoreWriter — places nix-built artifacts into `arca`.
 //! StoreReaderPool — concurrent path lookups.
 
 use crate::Result;
@@ -16,6 +16,6 @@ pub struct BundleOutcome {
 
 impl StoreWriter {
     pub async fn bundle(_spec: BundleSpec) -> Result<BundleOutcome> {
-        todo!("copy closure with RPATH rewrite (patchelf); blake3; write tree under ~/.lojix/store/<hash>/")
+        todo!("copy closure with RPATH rewrite (patchelf); blake3; write tree under ~/.arca/<hash>/")
     }
 }

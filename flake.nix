@@ -1,5 +1,5 @@
 {
-  description = "lojix — the lojix daemon (forge + store + deploy actors)";
+  description = "forge — the executor daemon (build + store + deploy actors)";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -20,7 +20,7 @@
       in
       {
         devShells.default = pkgs.mkShell {
-          name = "lojix";
+          name = "forge";
           packages = [ pkgs.jujutsu pkgs.pkg-config toolchain ];
         };
       }

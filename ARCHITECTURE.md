@@ -1,9 +1,9 @@
-# ARCHITECTURE — lojix
+# ARCHITECTURE — forge
 
-The lojix daemon — the executor of the lojix family. Takes
-plan records from criome (via signal verbs over UDS), runs
-nix, places artifacts into `lojix-store`, reports outcomes
-back.
+The forge daemon — the executor. Takes plan records from
+criome (via signal verbs over UDS), links `prism` to emit
+Rust source, runs nix, writes artifacts into `arca`, reports
+outcomes back.
 
 ## Role in the sema-ecosystem
 
@@ -15,9 +15,10 @@ back.
             │
             │  signal (rkyv: effect-bearing verbs)
             ▼
-   lojix (this daemon) — executes
+   forge (this daemon) — executes
             │
-            │  spawns
+            │  links prism (records → .rs)
+            │  spawns nix
             ▼
    nix build / nixos-rebuild
             │
@@ -26,28 +27,32 @@ back.
             │
             │  StoreWriter: copy closure + RPATH rewrite + blake3
             ▼
-   ~/.lojix/store/<blake3>/    (canonical, sema-referenced)
+   ~/.arca/<blake3>/           (canonical, sema-referenced)
 ```
 
 ## Boundaries
 
 Owns:
 
-- The lojix daemon binary.
+- The forge daemon binary.
 - Internal actor system (NixRunner, StoreWriter, StoreReaderPool,
   FileMaterialiser).
+- The prism library link (records → Rust source).
 - Capability-token verification on incoming signal requests
   (tokens signed by criome).
 
 Does not own:
 
 - The signal contract (lives in
-  [signal](https://github.com/LiGoldragon/signal); this daemon
-  consumes the effect-bearing subset).
-- The store layout / reader-writer types (lives in
-  [lojix-store](https://github.com/LiGoldragon/lojix-store);
-  this daemon links it as a library and is the privileged
-  writer at runtime).
+  [signal](https://github.com/LiGoldragon/signal)) and its
+  forge-bound layer (lives in
+  [signal-forge](https://github.com/LiGoldragon/signal-forge));
+  this daemon consumes both — signal for Frame/handshake/auth
+  + record types, signal-forge for the criome-to-forge verbs.
+- The arca layout / reader-writer types (lives in
+  [arca](https://github.com/LiGoldragon/arca); this daemon
+  links it as a library and is the privileged writer at
+  runtime).
 - Plan creation — criome plans; this daemon executes.
 - Sema state.
 
@@ -63,7 +68,7 @@ src/
     ├── mod.rs
     ├── nix_runner.rs        — spawns nix build / nixos-rebuild
     ├── store_writer.rs      — StoreWriter + StoreReaderPool
-    └── file_materialiser.rs — projects store entries → workdir
+    └── file_materialiser.rs — projects arca entries → workdir
 ```
 
 All bodies are `todo!()` skeleton-as-design.
@@ -72,9 +77,9 @@ All bodies are `todo!()` skeleton-as-design.
 
 - Project-wide architecture:
   [criome/ARCHITECTURE.md](https://github.com/LiGoldragon/criome/blob/main/ARCHITECTURE.md)
-- Family peers:
-  [lojix-store](https://github.com/LiGoldragon/lojix-store),
-  [lojix-cli](https://github.com/LiGoldragon/lojix-cli)
+- Sibling crates:
+  [arca](https://github.com/LiGoldragon/arca),
+  [prism](https://github.com/LiGoldragon/prism)
 
 ## Status
 
