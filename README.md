@@ -6,7 +6,7 @@ to emit Rust source from records; spawns nix subprocesses;
 writes outputs into `arca`;
 reports outcomes.
 
-See [`ARCHITECTURE.md`](ARCHITECTURE.md). Project-wide context:
+See `ARCHITECTURE.md`. Project-wide context:
 criome/ARCHITECTURE.md.
 
 ## Status
