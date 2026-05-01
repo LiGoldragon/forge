@@ -59,13 +59,13 @@ Owns:
 Does not own:
 
 - The signal contract (lives in
-  [signal](https://github.com/LiGoldragon/signal)) and its
+  signal) and its
   forge-bound layer (lives in
-  [signal-forge](https://github.com/LiGoldragon/signal-forge));
+  signal-forge);
   this daemon consumes both — signal for Frame/handshake/auth
   + record types, signal-forge for the criome-to-forge verbs.
 - The arca store layout (lives in
-  [arca](https://github.com/LiGoldragon/arca); arca-daemon is
+  arca; arca-daemon is
   the privileged writer; this daemon deposits into arca's
   write-only staging and asks arca-daemon to take ownership).
 - Plan creation — criome plans; this daemon executes.
@@ -96,10 +96,10 @@ All bodies are `todo!()` skeleton-as-design.
 ## Cross-cutting context
 
 - Project-wide architecture:
-  [criome/ARCHITECTURE.md](https://github.com/LiGoldragon/criome/blob/main/ARCHITECTURE.md)
+  criome/ARCHITECTURE.md
 - Sibling crates:
-  [arca](https://github.com/LiGoldragon/arca),
-  [prism](https://github.com/LiGoldragon/prism)
+  arca,
+  prism
 
 ## Status
 
