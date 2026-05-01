@@ -1,16 +1,7 @@
-# Agent Bootstrap — forge
+# Agent instructions — forge
 
-The forge daemon. Skeleton-as-design today; bodies are
-`todo!()`. Read [ARCHITECTURE.md](ARCHITECTURE.md) for
-boundaries and code map.
+You **MUST** read AGENTS.md at `github:ligoldragon/lore` — the workspace contract.
 
-For project-wide rules: [mentci/AGENTS.md](https://github.com/LiGoldragon/mentci/blob/main/AGENTS.md).
+## Repo role
 
-For project-wide architecture: [criome/ARCHITECTURE.md](https://github.com/LiGoldragon/criome/blob/main/ARCHITECTURE.md).
-
-## Process
-
-- Jujutsu only (`jj`).
-- Push immediately after every change.
-- Skeleton-as-design over prose-as-design.
-- One artifact per repo.
+The **forge daemon** — executor for effects sema can't perform directly (nix builds, store writes, deploy actions). Skeleton-as-design today; bodies are `todo!()`.
