@@ -5,6 +5,14 @@ criome (via signal verbs over UDS), links `prism` to emit
 Rust source, runs nix, writes artifacts into `arca`, reports
 outcomes back.
 
+> **Scope.** forge today executes effects sema can't perform
+> directly — nix builds, store writes, deploy actions. In the
+> eventually-self-hosting stack, build/deploy is one operation
+> inside ideal Criome's Sema-native substrate; today's forge is a
+> realization step, built rightly for the scope it serves now. See
+> `~/primary/ESSENCE.md` §"Today and eventually — different things,
+> different names".
+
 ## Role in the sema-ecosystem
 
 ```
