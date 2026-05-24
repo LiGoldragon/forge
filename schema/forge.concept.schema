@@ -1,0 +1,37 @@
+{}
+
+[
+  (Build [Derivation])
+  (Deploy [Activation])
+  (Store [Bundle])
+  (Deposit [Arca])
+]
+
+[
+  (Policy [Capability])
+]
+
+[]
+
+{
+  Build [(Derivation Derivation)]
+  Deploy [(Activation Activation)]
+  Store [(Bundle Bundle)]
+  Deposit [(Arca Arca)]
+  Policy [(Capability Capability)]
+  Derivation (Text)
+  Activation (Text)
+  Bundle (Text)
+  Arca (Text)
+  Capability (Text)
+  Text (String)
+  Identifier (u64)
+  Name (String)
+  Path (String)
+  Status [Concept Active Retired]
+}
+
+[
+  (Version 0 1)
+  (Status Concept)
+]
