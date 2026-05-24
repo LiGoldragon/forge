@@ -130,3 +130,20 @@ All bodies are `todo!()` skeleton-as-design.
 
 **Skeleton-as-design.** Lands when criome scaffolds and is
 ready to forward effect-bearing signal verbs.
+
+## Pending schema-engine upgrade
+
+**Status:** scheduled for migration to schema-language-based contract per `reports/designer/326-v13-spirit-complete-schema-vision.md` + `reports/designer/324-migration-mvp-spirit-handover-re-specification.md`.
+
+**Target:** this component's hand-written `signal_channel!` invocation + Layer 2 Command/Effect + storage types convert to a single `forge/forge.schema` file. The brilliant macro library (`primary-ezqx.1`) reads the schema + emits all the wire types + ShortHeader projection + dispatcher + VersionProjection + storage descriptors.
+
+**Sequence:** per `reports/designer/316` forge family direction. Spirit is the MVP pilot landing first via `primary-ezqx.1`; this component's schema cutover follows after pilot succeeds and the forge family direction settles (forge currently sits as skeleton-as-design, so cutover bundles with first-real-implementation rather than retrofitting code that does not yet exist).
+
+**Per-component concerns:** Per `/316` forge family direction; schema cutover follows persona triad. The skeleton state means the schema-engine-shaped form is the natural first implementation — no hand-written `signal_channel!` body to migrate; the `.schema` file becomes the substrate from day one once the macro library lands.
+
+**References:**
+- `reports/designer/326-v13-spirit-complete-schema-vision.md` — uniform header form + schema-language design
+- `reports/designer/324-migration-mvp-spirit-handover-re-specification.md` — migration MVP + handover state
+- `reports/designer/322-spirit-mvp-positional-schema-worked-example.md` — Spirit MVP worked example
+- `reports/operator/174-schema-import-header-design-critique-2026-05-24.md` — header/body/feature separation + lowering rules
+- `reports/designer/316-…` — forge family direction
