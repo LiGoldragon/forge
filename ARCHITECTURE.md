@@ -8,6 +8,18 @@
 > forge is **not** in any current production path. The repo is
 > skeleton-as-design while criome is being built.
 >
+> **Build-system family, phased Nix replacement.** forge is the
+> emerging build-system family rather than a single binary: `forge-core`
+> is the shared standardization contract that sub-forges adopt as they
+> mature, and `forge-nix-builder` is the first sub-forge — it wraps Nix
+> and extracts as a library under this forge daemon (still the
+> Criome-stack executor) rather than replacing Nix outright. The plan
+> keeps what is eternal in Nix (content-addressing, derivation graphs,
+> hermetic builds) while moving authorization to Criome and binary
+> signing to the workspace content-addressed store; generated Rust may
+> later become content-addressed crates directly, removing
+> generated-code repos. Nix phases out as forge matures.
+>
 > **Not related to the lojix deploy work.** GitHub redirects
 > `LiGoldragon/lojix` → `LiGoldragon/forge` because this repo was
 > previously named `lojix` and got renamed. The current deploy stack
