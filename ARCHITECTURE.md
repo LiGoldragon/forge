@@ -39,8 +39,7 @@ outcomes back.
 > actions. In the eventually-self-hosting stack, build/deploy is one
 > operation inside ideal Criome's Sema-native substrate; forge is a
 > realization step, built rightly for the scope it serves when criome
-> lands. See `~/primary/ESSENCE.md` §"Today and eventually — different
-> things, different names".
+> lands. See `~/primary/ARCHITECTURE.md` §"Workspace vision and intent".
 
 ## Role in the sema-ecosystem
 
