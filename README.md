@@ -4,13 +4,10 @@
 > infrastructure inside the sema-ecosystem. Not in any current
 > production path. Skeleton-as-design until criome scaffolds.
 >
-> **Not the lojix deploy daemon.** GitHub redirects
-> `LiGoldragon/lojix` → `LiGoldragon/forge` because this repo was
-> renamed. Today's deploy stack: `LiGoldragon/lojix-cli` (current
-> monolithic CLI). New deploy stack in development:
-> `LiGoldragon/lojix` (daemon + thin client) +
-> `LiGoldragon/signal-lojix` (wire contract). forge is a separate
-> concern.
+> **Not the Lojix deploy daemon.** The current deploy stack is
+> `LiGoldragon/lojix` (daemon + thin clients) with
+> `LiGoldragon/signal-lojix` and `LiGoldragon/meta-signal-lojix` wire
+> contracts. forge is a separate concern.
 
 The forge daemon. Receives effect-bearing signal verbs over
 UDS from the criome daemon; links `prism`

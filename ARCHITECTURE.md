@@ -20,14 +20,11 @@
 > later become content-addressed crates directly, removing
 > generated-code repos. Nix phases out as forge matures.
 >
-> **Not related to the lojix deploy work.** GitHub redirects
-> `LiGoldragon/lojix` → `LiGoldragon/forge` because this repo was
-> previously named `lojix` and got renamed. The current deploy stack
-> lives in `LiGoldragon/lojix-cli` (today's monolithic CLI) and
-> `LiGoldragon/lojix` (the new daemon + thin client repo, in
-> development). The contract crate is `LiGoldragon/signal-lojix`.
-> forge is a separate concern — the criome-stack executor, not the
-> operator-facing deploy orchestrator.
+> **Not related to the Lojix deploy work.** The current deploy stack
+> lives in `LiGoldragon/lojix` (daemon + thin clients) and the
+> `LiGoldragon/signal-lojix` / `LiGoldragon/meta-signal-lojix` wire
+> contracts. forge is a separate concern — the criome-stack executor,
+> not the operator-facing deploy orchestrator.
 
 The forge daemon — the executor. Takes plan records from
 criome (via signal verbs over UDS), links `prism` to emit
